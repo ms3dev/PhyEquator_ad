@@ -1,221 +1,364 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إعلان تفاعلي 300x100</title>
-    <style>
-        /* إعدادات خطوط أساسية متناسقة */
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
+    <title>Phytype Equation Editor</title>
 
+    <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
         }
 
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: transparent;
-            margin: 0;
-            padding: 0;
+            height: 100vh;
+            background: #ffffff;
         }
 
-        /* الحاوية الرئيسية المتجاوبة بمقاس 300x100 */
-        .ad-banner {
+        .banner {
+
             width: 300px;
             height: 100px;
-            background-color: gold;
-            /* border: 1px solid #e0e0e0; */
-            border-radius: 6px;
+
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            user-select: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            border-radius: 6px;
+
+            background: linear-gradient(135deg, #04152f, #0b3d91, #118dff);
+
+            /*box-shadow: 0 0 25px rgba(0,140,255,.45);*/
+
+            font-family: Segoe UI, Arial, sans-serif;
+
         }
 
-        /* تأثير حركي خفيف عند مرور الماوس فوق الإعلان */
-        /* .ad-banner:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        } */
+        /*** Glow ***/
 
-        /* قسم النصوص */
-        .ad-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-            padding-left: 10px;
-        }
+        .banner::before {
 
-        .ad-title {
-            font-size: 14px;
-            color: #1a1a1a;
-            font-weight: 700;
-            margin-bottom: 4px;
-            line-height: 1.3;
-            opacity: 0;
-            transform: translateY(5px);
-            transition: all 0.4s ease;
-        }
+            content: "";
 
-        .ad-subtitle {
-            font-size: 11px;
-            color: #666666;
-            line-height: 1.2;
-            opacity: 0;
-            transform: translateY(5px);
-            transition: all 0.4s ease;
-        }
-
-        /* الفئة النشطة لإظهار النص بحركة ناعمة */
-        .slide-active .ad-title,
-        .slide-active .ad-subtitle {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* زر الإجراء (CTA) */
-        .ad-btn {
-            background-color: #007ffd;
-            color: #ffffff;
-            border: none;
-            padding: 8px 14px;
-            font-size: 11px;
-            font-weight: 700;
-            border-radius: 20px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            box-shadow: 0 2px 6px rgba(0, 127, 253, 0.2);
-        }
-
-        .ad-btn:hover {
-            background-color: #0066cc;
-            transform: scale(1.05);
-        }
-
-        /* النقاط التفاعلية السفلية (Indicators) */
-        .ad-indicators {
             position: absolute;
-            bottom: 6px;
-            right: 15px;
-            display: flex;
-            gap: 4px;
-        }
 
-        .dot {
-            width: 5px;
-            height: 5px;
-            background-color: #cccccc;
+            width: 180px;
+            height: 180px;
+
+            left: -70px;
+            top: -40px;
+
             border-radius: 50%;
-            transition: all 0.3s ease;
-            margin-left: 2px;
+
+            background: rgba(255, 255, 255, .18);
+
+            filter: blur(35px);
+
+            animation: moveGlow 6s ease-in-out infinite alternate;
+
         }
 
-        .dot.active {
-            width: 12px;
-            border-radius: 3px;
-            background-color: #007ffd;
+        /*** Equations ***/
+
+        .equations {
+
+            position: absolute;
+
+            top: 10px;
+            left: 150px;
+
+            font-size: 18px;
+
+            color: rgba(255, 255, 255, .10);
+
+            transform: rotate(-10deg);
+
+            white-space: nowrap;
+
+            animation: scrollEquation 15s linear infinite;
+
+        }
+
+        /*** Logo ***/
+
+        .logo {
+
+            position: absolute;
+
+            left: 12px;
+            top: 14px;
+
+            width: 72px;
+            height: 72px;
+
+            border-radius: 4px;
+
+
+            object-fit: contain;
+
+            filter: drop-shadow(0 0 8px #5fd2ff);
+
+            animation: floatLogo 3s ease-in-out infinite;
+
+
+        }
+
+        /*** Shine ***/
+
+        .shine {
+
+            position: absolute;
+
+            left: -80px;
+            top: 0;
+
+            width: 40px;
+            height: 100%;
+
+            transform: skewX(-25deg);
+
+            background: rgba(255, 255, 255, .45);
+
+            filter: blur(8px);
+
+            animation: shine 5s infinite;
+
+        }
+
+        /*** Text ***/
+
+        .title {
+
+            position: absolute;
+
+            left: 96px;
+            top: 0px;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: white;
+
+            text-shadow:
+                0 0 8px #00d0ff,
+                0 0 18px #0095ff;
+
+            animation: titleGlow 2s infinite alternate;
+
+        }
+
+        .subtitle {
+
+            position: absolute;
+
+            left: 97px;
+            top: 40px;
+
+            color: #d6eeff;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+        }
+
+        .arabic {
+            position: absolute;
+            left: 97px;
+            top: 55px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            bottom: 10px;
+            /* letter-spacing:5px; */
+            text-shadow: 0 0 8px rgba(0, 220, 255, .8);
+            animation: fadeText 3s ease-in-out infinite;
+        }
+
+        .line {
+
+            position: absolute;
+
+            left: 97px;
+            bottom: 15px;
+
+            width: 170px;
+            height: 2px;
+
+            background:
+                linear-gradient(90deg, #00d5ff, #ffffff, #00d5ff);
+
+            animation: lineGlow 2s infinite;
+
+        }
+
+
+
+        /*** Animations ***/
+
+        @keyframes fadeText {
+            0% {
+                opacity: .7;
+            }
+
+            50% {
+                opacity: 1;
+
+            }
+
+            100% {
+                opacity: .7;
+            }
+
+        }
+
+
+        @keyframes floatLogo {
+
+            0%,
+            100% {
+
+                transform: translateY(0);
+
+            }
+
+            50% {
+
+                transform: translateY(-5px);
+
+            }
+
+        }
+
+        @keyframes moveGlow {
+
+            from {
+
+                transform: translateX(0);
+
+            }
+
+            to {
+
+                transform: translateX(150px);
+
+            }
+
+        }
+
+        @keyframes shine {
+
+            0% {
+
+                left: -80px;
+
+            }
+
+            100% {
+
+                left: 350px;
+
+            }
+
+        }
+
+        @keyframes titleGlow {
+
+            from {
+
+                text-shadow:
+                    0 0 8px #00bfff;
+
+            }
+
+            to {
+
+                text-shadow:
+                    0 0 14px #00ffff,
+                    0 0 28px #00aaff;
+
+            }
+
+        }
+
+        @keyframes scrollEquation {
+
+            0% {
+
+                transform: translateX(0) rotate(-10deg);
+
+            }
+
+            100% {
+
+                transform: translateX(-500px) rotate(-10deg);
+
+            }
+
+        }
+
+        @keyframes lineGlow {
+
+            0% {
+
+                opacity: .4;
+
+            }
+
+            50% {
+
+                opacity: 1;
+
+            }
+
+            100% {
+
+                opacity: .4;
+
+            }
+
         }
     </style>
+
 </head>
+
 <body>
 
-    <!-- هيكل الإعلان -->
-    <div class="ad-banner" id="interactiveAd" onclick="handleAdClick()">
-        <div class="ad-content slide-active" id="adContent">
-            <h2 class="ad-title" id="adTitle">تصاميم ذكية ومبتكرة</h2>
-            <p class="ad-subtitle" id="adSubtitle">ارتقِ بأعمالك إلى المستوى التالي اليوم.</p>
+    <div class="banner">
+
+        <div class="shine"></div>
+
+        <div class="title">
+            Phytype
         </div>
-        <button class="ad-btn">اشترك الآن</button>
-        
-        <!-- نقاط التنقل التفاعلية -->
-        <div class="ad-indicators" id="adIndicators">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+
+        <div class="subtitle">
+            Equation Editor V1.0
         </div>
+
+        <div class="line"></div>
+
+        <div class="equations">
+
+            F = ma &nbsp;&nbsp;
+            E = mc² &nbsp;&nbsp;
+            ∫x²dx &nbsp;&nbsp;
+            H₂ + O₂ → H₂O &nbsp;&nbsp;
+            ΣF = 0
+
+        </div>
+        <div class="arabic">محرر المعادلات العربي</div>
+
+        <img src="logo.jpg" class="logo">
     </div>
 
-    <script>
-        // البيانات الخاصة بالشرائح التفاعلية داخل الإعلان
-        const adSlides = [
-            {
-                title: "تصاميم ذكية ومبتكرة",
-                subtitle: "ارتقِ بأعمالك إلى المستوى التالي اليوم."
-            },
-            {
-                title: "سرعة وأداء فائق",
-                subtitle: "مواقع متجاوبة وتطبيقات خفيفة السيرفر."
-            },
-            {
-                title: "خصم لفترة محدودة %30",
-                subtitle: "استخدم الكود AD30 عند الدفع الآن."
-            }
-        ];
+    
 
-        let currentSlide = 0;
-        const contentContainer = document.getElementById('adContent');
-        const titleEl = document.getElementById('adTitle');
-        const subtitleEl = document.getElementById('adSubtitle');
-        const dots = document.querySelectorAll('.dot');
-
-        function updateSlide() {
-            // إزالة فئة الحركة لإخفاء النص الحالي
-            contentContainer.classList.remove('slide-active');
-
-            setTimeout(() => {
-                // تغيير النصوص بناءً على الشريحة الحالية
-                titleEl.textContent = adSlides[currentSlide].title;
-                subtitleEl.textContent = adSlides[currentSlide].subtitle;
-
-                // تحديث حالة النقاط السفلية
-                dots.forEach((dot, index) => {
-                    if (index === currentSlide) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-
-                // إعادة فئة الحركة لإظهار النص الجديد
-                contentContainer.classList.add('slide-active');
-            }, 200); // وقت قصير لضمان سلاسة الانتقال
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % adSlides.length;
-            updateSlide();
-        }
-
-        // تبديل تلقائي للشرائح كل 3 ثوانٍ
-        let slideInterval = setInterval(nextSlide, 3000);
-
-        // التعامل مع الضغط على الإعلان بالكامل
-        function handleAdClick() {
-            // هنا يمكنك توجيه المستخدم للرابط المطلوب
-            console.log("تم الضغط على الإعلان! التوجه إلى الرابط الترويجي...");
-            alert("شكراً لتفاعلك! سيتم توجيهك الآن إلى صفحة العرض.");
-        }
-
-        // منع زر الـ CTA من تكرار الحدث مرتين عند الضغط عليه تحديداً
-        document.querySelector('.ad-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            handleAdClick();
-        });
-    </script>
 </body>
+
 </html>
