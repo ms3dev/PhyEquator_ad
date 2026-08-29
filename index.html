@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8">
-    <title>Phytype Equation Editor</title>
+    <title>Phytype Equation Editor v1.6</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-user-select: none; /* Safari */
-            -ms-user-select: none;     /* IE 10+ and Edge */
-            user-select: none;         /* Standard syntax */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         body {
@@ -24,344 +24,205 @@
         }
 
         .banner {
-
             width: 300px;
             height: 100px;
-
             position: relative;
             overflow: hidden;
-
-            border-radius: 6px;
-
+            border-radius: 8px;
             background: linear-gradient(135deg, #04152f, #0b3d91, #118dff);
-            /*background: linear-gradient(135deg, #0f0c20, #1d1744, #392b84);*/
-
-            /*box-shadow: 0 0 25px rgba(0,140,255,.45);*/
-
-            font-family: Segoe UI, Arial, sans-serif;
-
+            font-family: 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 4px 20px rgba(11, 61, 145, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /*cursor: pointer;*/
         }
 
-        /*** Glow ***/
-
+        /*** Glowing Backdrop Effect ***/
         .banner::before {
-
             content: "";
-
             position: absolute;
-
             width: 180px;
             height: 180px;
-
             left: -70px;
             top: -40px;
-
             border-radius: 50%;
-
             background: rgba(255, 255, 255, .18);
-
             filter: blur(35px);
-
             animation: moveGlow 6s ease-in-out infinite alternate;
-
+            pointer-events: none;
         }
 
-        /*** Equations ***/
-
-        .equations {
-
+        /*** Floating Watermark Math Symbol ***/
+        .math-watermark {
             position: absolute;
-
-            top: 10px;
-            left: 150px;
-
-            font-size: 18px;
-
-            color: rgba(255, 255, 255, .10);
-
-            transform: rotate(-10deg);
-
-            white-space: nowrap;
-
-            animation: scrollEquation 15s linear infinite;
-
+            right: 5px;
+            bottom: -15px;
+            font-size: 80px;
+            color: rgba(255, 255, 255, 0.05);
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            pointer-events: none;
         }
 
         /*** Logo ***/
-
         .logo {
-
             position: absolute;
-
             left: 12px;
             top: 14px;
-
             width: 72px;
             height: 72px;
-
-            border-radius: 4px;
-
-
+            border-radius: 6px;
             object-fit: contain;
-
             filter: drop-shadow(0 0 8px #5fd2ff);
-
             animation: floatLogo 3s ease-in-out infinite;
-
-
+            z-index: 2;
         }
 
-        /*** Shine ***/
-
+        /*** Shine Effect ***/
         .shine {
-
             position: absolute;
-
             left: -80px;
             top: 0;
-
             width: 40px;
             height: 100%;
-
             transform: skewX(-25deg);
-
             background: rgba(255, 255, 255, .45);
-
             filter: blur(8px);
-
             animation: shine 5s infinite;
-
+            z-index: 3;
         }
 
-        /*** Text ***/
-
+        /*** Main Texts ***/
         .title {
-
             position: absolute;
-
             left: 96px;
-            top: 0px;
-
-            font-size: 28px;
-
-            font-weight: bold;
-
+            top: 2px;
+            font-size: 20px;
+            font-weight: 800;
             color: white;
-
-            text-shadow:
-                0 0 8px #00d0ff,
-                0 0 18px #0095ff;
-
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px #00d0ff, 0 0 18px #0095ff;
             animation: titleGlow 2s infinite alternate;
-
+            z-index: 2;
         }
 
         .subtitle {
-
             position: absolute;
-
-            left: 97px;
-            top: 55px;
-
+            left: 96px;
+            top: 28px;
             color: #d6eeff;
-
-            font-size: 13px;
-
-            letter-spacing: 2px;
-
-        }
-
-        .arabic {
-            position: absolute;
-            left: 97px;
-            top: 40px;
-            color: #ffffff;
-            font-size: 14px;
+            font-size: 10px;
+            letter-spacing: 1px;
             font-weight: 600;
-            bottom: 10px;
-            /* letter-spacing:5px; */
-            text-shadow: 0 0 8px rgba(0, 220, 255, .8);
-            animation: fadeText 3s ease-in-out infinite;
+            z-index: 2;
         }
 
         .line {
-
             position: absolute;
-
-            left: 97px;
-            bottom: 15px;
-
-            width: 170px;
+            left: 96px;
+            top: 46px;
+            width: 190px;
             height: 2px;
-
-            background:
-                linear-gradient(90deg, #00d5ff, #ffffff, #00d5ff);
-
+            background: linear-gradient(90deg, #00d5ff, #ffffff, rgba(0, 213, 255, 0.2));
             animation: lineGlow 2s infinite;
-
+            z-index: 2;
         }
 
-
-
-        /*** Animations ***/
-
-        @keyframes fadeText {
-            0% {
-                opacity: .7;
-            }
-
-            50% {
-                opacity: 1;
-
-            }
-
-            100% {
-                opacity: .7;
-            }
-
+        /*** Dynamic Equations Container ***/
+        .equation-box {
+            position: absolute;
+            left: 96px;
+            top: 52px;
+            width: 190px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 2;
         }
 
+        .dynamic-equation {
+            color: #00ffff;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            direction: ltr;
+            transition: all 0.4s ease-in-out;
+            white-space: nowrap;
+        }
 
+        /*** Keyframe Animations ***/
         @keyframes floatLogo {
-
-            0%,
-            100% {
-
-                transform: translateY(0);
-
-            }
-
-            50% {
-
-                transform: translateY(-5px);
-
-            }
-
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
         @keyframes moveGlow {
-
-            from {
-
-                transform: translateX(0);
-
-            }
-
-            to {
-
-                transform: translateX(150px);
-
-            }
-
+            from { transform: translateX(0); }
+            to { transform: translateX(120px); }
         }
 
         @keyframes shine {
-
-            0% {
-
-                left: -80px;
-
-            }
-
-            100% {
-
-                left: 350px;
-
-            }
-
+            0% { left: -80px; }
+            30%, 100% { left: 380px; }
         }
 
         @keyframes titleGlow {
-
-            from {
-
-                text-shadow:
-                    0 0 8px #00bfff;
-
-            }
-
-            to {
-
-                text-shadow:
-                    0 0 14px #00ffff,
-                    0 0 28px #00aaff;
-
-            }
-
-        }
-
-        @keyframes scrollEquation {
-
-            0% {
-
-                transform: translateX(0) rotate(-10deg);
-
-            }
-
-            100% {
-
-                transform: translateX(-500px) rotate(-10deg);
-
-            }
-
+            from { text-shadow: 0 0 8px #00bfff; }
+            to { text-shadow: 0 0 14px #00ffff, 0 0 25px #00aaff; }
         }
 
         @keyframes lineGlow {
-
-            0% {
-
-                opacity: .4;
-
-            }
-
-            50% {
-
-                opacity: 1;
-
-            }
-
-            100% {
-
-                opacity: .4;
-
-            }
-
+            0%, 100% { opacity: .4; }
+            50% { opacity: 1; }
         }
     </style>
-
 </head>
 
 <body>
 
     <div class="banner">
-
         <div class="shine"></div>
+        <div class="math-watermark">∫</div>
 
-        <div class="title">
-            Phytype
-        </div>
-
-        <div class="subtitle">
-            Equation Editor V1.6
-        </div>
+        <div class="title">Phytype</div>
+        <div class="subtitle">EQUATION EDITOR V1.6</div>
 
         <div class="line"></div>
 
-        <div class="equations">
-
-            F = ma &nbsp;&nbsp;
-            E = mc² &nbsp;&nbsp;
-            ∫x²dx &nbsp;&nbsp;
-            H₂ + O₂ → H₂O &nbsp;&nbsp;
-            ΣF = 0
-
+        <div class="equation-box">
+            <div class="dynamic-equation" id="equationText">E = mc²</div>
         </div>
-        <div class="arabic">محرر المعادلات</div>
 
-        <img src="logo.jpg" class="logo">
+        <img src="logo.png" class="logo" alt="Phytype Logo">
     </div>
 
-    
+    <script>
+        const equations = [
+            "E = mc²",
+            "∫ x² dx = x³/3 + C",
+            "F = G · (m₁m₂ / r²)",
+            "∇ × B = μ₀J",
+            "iħ(∂Ψ/∂t) = ĤΨ",
+            "H₂ + O₂ → H₂O"
+        ];
+
+        let currentIndex = 0;
+        const eqElement = document.getElementById('equationText');
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % equations.length;
+
+            eqElement.style.opacity = '0';
+            eqElement.style.transform = 'translateY(5px) scale(0.95)';
+
+            setTimeout(() => {
+                eqElement.textContent = equations[currentIndex];
+                eqElement.style.opacity = '1';
+                eqElement.style.transform = 'translateY(0) scale(1)';
+            }, 400);
+        }, 2500);
+    </script>
 
 </body>
 
