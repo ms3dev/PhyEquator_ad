@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Phytype Equation Editor v1.6</title>
 
     <style>
@@ -30,7 +30,7 @@
             overflow: hidden;
             border-radius: 8px;
             background: linear-gradient(135deg, #04152f, #0b3d91, #118dff);
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: "Segoe UI", Arial, sans-serif;
             box-shadow: 0 4px 20px rgba(11, 61, 145, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.15);
             /*cursor: pointer;*/
@@ -45,7 +45,7 @@
             left: -70px;
             top: -40px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, .18);
+            background: rgba(255, 255, 255, 0.18);
             filter: blur(35px);
             animation: moveGlow 6s ease-in-out infinite alternate;
             pointer-events: none;
@@ -58,7 +58,7 @@
             bottom: -15px;
             font-size: 80px;
             color: rgba(255, 255, 255, 0.05);
-            font-family: 'Times New Roman', serif;
+            font-family: "Times New Roman", serif;
             font-weight: bold;
             pointer-events: none;
         }
@@ -85,7 +85,7 @@
             width: 40px;
             height: 100%;
             transform: skewX(-25deg);
-            background: rgba(255, 255, 255, .45);
+            background: rgba(255, 255, 255, 0.45);
             filter: blur(8px);
             animation: shine 5s infinite;
             z-index: 3;
@@ -100,7 +100,9 @@
             font-weight: 800;
             color: white;
             letter-spacing: 0.5px;
-            text-shadow: 0 0 8px #00d0ff, 0 0 18px #0095ff;
+            text-shadow:
+                0 0 8px #00d0ff,
+                0 0 18px #0095ff;
             animation: titleGlow 2s infinite alternate;
             z-index: 2;
         }
@@ -122,7 +124,10 @@
             top: 46px;
             width: 190px;
             height: 2px;
-            background: linear-gradient(90deg, #00d5ff, #ffffff, rgba(0, 213, 255, 0.2));
+            background: linear-gradient(90deg,
+                    #00d5ff,
+                    #ffffff,
+                    rgba(0, 213, 255, 0.2));
             animation: lineGlow 2s infinite;
             z-index: 2;
         }
@@ -144,43 +149,152 @@
             color: #00ffff;
             font-size: 15px;
             font-weight: bold;
-            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-family: "Cambria Math", "Times New Roman", serif;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
             direction: ltr;
             transition: all 0.4s ease-in-out;
             white-space: nowrap;
         }
 
+        .bookmark {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    z-index: 20;
+
+    text-decoration: none;
+    color: rgb(7, 98, 182);
+
+    width: 60px;
+    height: 80px;
+
+    cursor: pointer;
+
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+/* تأثير عند مرور الماوس */
+.bookmark:hover {
+    transform: translateY(3px);
+    filter: brightness(1.12);
+}
+
+/* SVG */
+.bookmark svg {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.25));
+}
+
+/* محتوى الكتابة */
+.bookmark-content {
+    position: relative;
+    z-index: 2;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding-top: 10px;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+}
+
+.bookmark-new {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    opacity: 0.9;
+}
+
+.bookmark-version {
+    margin-top: 5px;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+.bookmark-arrow {
+    margin-top: 5px;
+
+    font-size: 12px;
+    opacity: 0.85;
+}
+
         /*** Keyframe Animations ***/
         @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
         }
 
         @keyframes moveGlow {
-            from { transform: translateX(0); }
-            to { transform: translateX(120px); }
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(120px);
+            }
         }
 
         @keyframes shine {
-            0% { left: -80px; }
-            30%, 100% { left: 380px; }
+            0% {
+                left: -80px;
+            }
+
+            30%,
+            100% {
+                left: 380px;
+            }
         }
 
         @keyframes titleGlow {
-            from { text-shadow: 0 0 8px #00bfff; }
-            to { text-shadow: 0 0 14px #00ffff, 0 0 25px #00aaff; }
+            from {
+                text-shadow: 0 0 8px #00bfff;
+            }
+
+            to {
+                text-shadow:
+                    0 0 14px #00ffff,
+                    0 0 25px #00aaff;
+            }
         }
 
         @keyframes lineGlow {
-            0%, 100% { opacity: .4; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <div class="banner">
         <div class="shine"></div>
         <div class="math-watermark">∫</div>
@@ -194,7 +308,63 @@
             <div class="dynamic-equation" id="equationText">E = mc²</div>
         </div>
 
-        <img src="logo.png" class="logo" alt="Phytype Logo">
+        <img src="logo.png" class="logo" alt="Phytype Logo" />
+    
+        <a
+    href="https://facebook.com/MS3Dev"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bookmark"
+    title="اكتشف الإصدار الجديد v1.6"
+>
+    <svg
+        viewBox="0 0 82 105"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+    >
+        <defs>
+            <linearGradient id="bookmarkGradient"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1">
+                <stop offset="0%" stop-color="#e7d746"/>
+                <stop offset="100%" stop-color="#c8ef88"/>
+            </linearGradient>
+        </defs>
+
+        <!-- جسم الـ Bookmark -->
+        <path
+            d="M2 2
+               Q2 0 5 0
+               H77
+               Q80 0 80 3
+               V105
+               L41 89
+               L2 105
+               Z"
+            fill="url(#bookmarkGradient)"
+        />
+
+        <!-- لمعة جانبية -->
+        <path
+            d="M68 8 V82"
+            stroke="rgba(255,255,255,0.18)"
+            stroke-width="2"
+            stroke-linecap="round"
+        />
+    </svg>
+
+    <div class="bookmark-content">
+        <div class="bookmark-new">حمل</div>
+        <div class="bookmark-new">آخر تحديث</div>
+
+        <div class="bookmark-version">
+            v1.6
+        </div>
+    </div>
+</a>
+
     </div>
 
     <script>
@@ -204,26 +374,25 @@
             "F = G · (m₁m₂ / r²)",
             "∇ × B = μ₀J",
             "iħ(∂Ψ/∂t) = ĤΨ",
-            "H₂ + O₂ → H₂O"
+            "H₂ + O₂ → H₂O",
         ];
 
         let currentIndex = 0;
-        const eqElement = document.getElementById('equationText');
+        const eqElement = document.getElementById("equationText");
 
         setInterval(() => {
             currentIndex = (currentIndex + 1) % equations.length;
 
-            eqElement.style.opacity = '0';
-            eqElement.style.transform = 'translateY(5px) scale(0.95)';
+            eqElement.style.opacity = "0";
+            eqElement.style.transform = "translateY(5px) scale(0.95)";
 
             setTimeout(() => {
                 eqElement.textContent = equations[currentIndex];
-                eqElement.style.opacity = '1';
-                eqElement.style.transform = 'translateY(0) scale(1)';
+                eqElement.style.opacity = "1";
+                eqElement.style.transform = "translateY(0) scale(1)";
             }, 400);
         }, 2500);
     </script>
-
 </body>
 
 </html>
