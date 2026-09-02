@@ -168,7 +168,8 @@
     width: 60px;
     height: 80px;
 
-    cursor: pointer;
+    cursor: default;
+    pointer-events: none;
 
     transition: transform 0.25s ease, filter 0.25s ease;
 }
@@ -311,11 +312,12 @@
         <img src="logo.png" class="logo" alt="Phytype Logo" />
     
         <a
-    href="https://facebook.com/MS3Dev"
+    href="#"
     target="_blank"
     rel="noopener noreferrer"
     class="bookmark"
     title="اكتشف الإصدار الجديد v1.6"
+    onclick="return false;"
 >
     <svg
         viewBox="0 0 82 105"
